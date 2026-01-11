@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {% block head_meta %}{% endblock %}
+
+  <title>{% block title %}控制台{% endblock %} - FlaskStarterKit</title>
+
+  {% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap-5.3.8/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+  {% endblock %}
+
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  <a class="visually-hidden-focusable" href="#main">跳到主要内容</a>
+
+  <div class="d-flex" id="layout">
+    <nav id="sidebar" aria-label="侧边栏导航">
+      {% block sidebar %}
+        {% set _endpoint = request.endpoint or '' %}
+        <div class="logo">
+          <span>FlaskStarterKit</span>
+        </div>
+
+        <ul class="nav flex-column mt-3">
+          <li class="nav-item">
+            <a class="nav-link {% if _endpoint.startswith('main.') and _endpoint != 'main.users_index' %}active{% endif %}" href="{{ url_for('main.dashboard') }}">
+              {{ _('仪表盘') }}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if _endpoint == 'main.users_index' %}active{% endif %}" href="{{ url_for('main.users_index') }}">
+              {{ _('用户') }}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              {{ _('系统设置') }}
+            </a>
+          </li>
+        </ul>
+      {% endblock %}
+    </nav>
+
+    <main id="main" class="flex-grow-1" tabindex="-1">
+      <header class="top-navbar d-flex justify-content-between align-items-center">
+        {% block navbar_left %}
+          <button
+            class="btn btn-sm btn-outline-secondary d-md-none"
+            type="button"
+            id="sidebarCollapse"
+            aria-controls="sidebar"
+            aria-expanded="false"
+          >
+            菜单
+          </button>
+        {% endblock %}
+
+        {% block navbar_right %}
+          <div class="ms-auto d-flex align-items-center">
+            <div class="dropdown me-3">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                🌐 {{ _('语言') }}
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="{{ url_for('i18n.set_language', lang='zh_CN') }}">中文</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('i18n.set_language', lang='en') }}">English</a></li>
+              </ul>
+            </div>
+
+            {% if current_user.is_authenticated %}
+              <span class="text-muted">{{ current_user.email }}</span>
+            {% else %}
+              <span class="text-muted">{{ _('访客') }}</span>
+            {% endif %}
+          </div>
+        {% endblock %}
+      </header>
+
+      <div class="content-wrapper">
+        {% block content %}{% endblock %}
+      </div>
+
+      {% block footer %}
+        <footer class="text-center py-3 text-muted border-top mt-auto">
+          <small>&copy; 2026 FlaskStarterKit - Professional Management System</small>
+        </footer>
+      {% endblock %}
+    </main>
+  </div>
+
+  {% block scripts %}
+    <script src="{{ url_for('static', filename='vendor/bootstrap-5.3.8/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/common.js') }}"></script>
+  {% endblock %}
+
+  {% block extra_js %}{% endblock %}
+</body>
+</html>
+

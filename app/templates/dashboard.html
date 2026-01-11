@@ -1,0 +1,33 @@
+<!-- /app/templates/dashboard.html -->
+{% extends "base.html" %}
+
+{% block title %}{{ _('仪表盘') }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h1 class="h4 mb-0">{{ _('仪表盘') }}</h1>
+    <a class="btn btn-outline-secondary btn-sm" href="{{ url_for('auth.logout') }}">{{ _('退出登录') }}</a>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="text-muted small">{{ _('当前功能') }}</div>
+          <div class="fw-semibold">{{ _('用户注册/登录') }}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="text-muted small">{{ _('健康检查') }}</div>
+          <div class="fw-semibold">/health</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

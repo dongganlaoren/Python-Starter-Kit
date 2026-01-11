@@ -1,0 +1,38 @@
+# --- 核心框架 ---
+Flask
+Flask-WTF
+Flask-Migrate
+flask-login
+flask-babel
+
+# --- 表单与验证 ---
+WTForms
+email_validator
+
+# --- 数据库 ---
+Flask-SQLAlchemy
+SQLAlchemy
+PyMySQL
+alembic
+cryptography
+
+# --- 配置与环境管理 ---
+python-dotenv
+
+# --- 部署工具 ---
+gunicorn
+
+# --- 工具与开发辅助 ---
+click
+Faker
+MarkupSafe
+Werkzeug
+isort
+flake8
+black
+
+# --- 测试框架 ---
+pytest
+pytest-cov
+pytest-flask
+pytest-mock

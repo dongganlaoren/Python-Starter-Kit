@@ -1,0 +1,33 @@
+<!-- /app/templates/auth/login.html -->
+{% extends "auth/_layout.html" %}
+
+{% block page_title %}{{ _('登录') }} - Python Starter Kit{% endblock %}
+{% block page_heading %}{{ _('登录') }}{% endblock %}
+
+{% block content %}
+<form method="post" novalidate>
+  {{ form.hidden_tag() }}
+
+  <div class="mb-3">
+    <label class="form-label" for="email">{{ _('邮箱') }}</label>
+    {{ form.email(class_="form-control", id="email", placeholder="name@example.com") }}
+    {% for err in form.email.errors %}
+      <div class="text-danger small">{{ err }}</div>
+    {% endfor %}
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label" for="password">{{ _('密码') }}</label>
+    {{ form.password(class_="form-control", id="password") }}
+    {% for err in form.password.errors %}
+      <div class="text-danger small">{{ err }}</div>
+    {% endfor %}
+  </div>
+
+  <button class="btn btn-primary w-100" type="submit">{{ _('登录') }}</button>
+
+  <div class="mt-3 small">
+    <a href="{{ url_for('auth.register') }}">{{ _('没有账号？去注册') }}</a>
+  </div>
+</form>
+{% endblock %}

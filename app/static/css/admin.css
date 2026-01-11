@@ -1,0 +1,67 @@
+/* /app/static/css/admin.css */
+
+:root {
+    --sidebar-width: 250px;
+    --primary-color: #2c3e50;
+    --accent-color: #3498db;
+    --bg-light: #f8f9fa;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-light);
+}
+
+/* 侧边栏样式 */
+#sidebar {
+    width: var(--sidebar-width);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    color: white;
+    transition: all 0.3s;
+    z-index: 1000;
+}
+
+#sidebar .logo {
+    padding: 20px;
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+#sidebar .nav-link {
+    color: rgba(255,255,255,0.8);
+    padding: 12px 20px;
+}
+
+#sidebar .nav-link:hover, #sidebar .nav-link.active {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+/* 主体内容区域（与 base.html 的 <main id="main"> 对齐） */
+#main {
+    margin-left: var(--sidebar-width);
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+.top-navbar {
+    background: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    padding: 10px 20px;
+}
+
+.content-wrapper {
+    padding: 25px;
+}
+
+/* 响应式适配：手机端默认隐藏侧边栏，通过 .active 拉出 */
+@media (max-width: 768px) {
+    #sidebar { margin-left: calc(-1 * var(--sidebar-width)); }
+    #main { margin-left: 0; }
+    #sidebar.active { margin-left: 0; }
+}

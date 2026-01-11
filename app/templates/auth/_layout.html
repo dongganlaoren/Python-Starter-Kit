@@ -1,0 +1,106 @@
+<!-- /app/templates/auth/_layout.html -->
+<!doctype html>
+<html lang="{{ get_locale() if get_locale is defined else 'zh-CN' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{% block page_title %}Python Starter Kit{% endblock %}</title>
+
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='ico/Python Starter Kit.png') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap-5.3.8/css/bootstrap.min.css') }}">
+
+  <style>
+    /* Auth Layout：登录/注册独立布局，避免套用后台 Sidebar */
+    body {
+      background: radial-gradient(1200px 600px at 20% 10%, rgba(13, 110, 253, 0.12), transparent 60%),
+                  radial-gradient(1000px 500px at 90% 20%, rgba(32, 201, 151, 0.10), transparent 60%),
+                  #f8f9fa;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .auth-card {
+      border: 0;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .auth-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1rem;
+    }
+
+    .auth-logo {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+
+    .auth-title {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .auth-subtitle {
+      margin: 0;
+      font-size: 0.875rem;
+      color: #6c757d;
+    }
+  </style>
+
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  <div class="container" style="max-width: 440px;">
+    <div class="card shadow-sm auth-card">
+      <div class="card-body p-4 p-md-4">
+        <div class="d-flex justify-content-between align-items-start">
+          <div class="auth-header mb-0">
+            <img class="auth-logo" src="{{ url_for('static', filename='ico/Python Starter Kit.png') }}" alt="Python Starter Kit">
+            <div>
+              <p class="auth-title">Python Starter Kit</p>
+              <p class="auth-subtitle">{% block page_heading %}{% endblock %}</p>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <a class="btn btn-sm btn-outline-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ _('语言') }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="{{ url_for('i18n.set_language', lang='zh_CN') }}">中文</a></li>
+              <li><a class="dropdown-item" href="{{ url_for('i18n.set_language', lang='en') }}">English</a></li>
+            </ul>
+          </div>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+
+        <hr class="my-4">
+        <div class="d-flex justify-content-between small text-muted">
+          <span>© 2026 Python Starter Kit</span>
+          <a class="text-decoration-none" href="{{ url_for('main.index') }}">{{ _('返回') }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='vendor/bootstrap-5.3.8/js/bootstrap.bundle.min.js') }}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>
+

@@ -1,0 +1,19 @@
+<!-- /app/templates/users/index.html -->
+{% extends "base.html" %}
+
+{% block title %}{{ _('用户管理') }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h1 class="h4 mb-0">{{ _('用户管理') }}</h1>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <p class="text-muted mb-0">{{ _('这里预留给用户管理功能（后续可扩展：用户列表、角色、重置密码等）。') }}</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
